@@ -13,20 +13,29 @@ namespace Questions
             Console.WriteLine("Nic nie robie caly dzien. Sprawdzam czy to dziala");
 
             // lista obiektow Pytanie, wczytanie do niej pytan z Excela i wyswietlenie wszystkich pytan
-            //List<Pytanie> listaPytaaaan = new List<Pytanie>();
-            //listaPytaaaan = ReadFromExcel.Read();
+            List<Pytanie> wszystkiePytania = new List<Pytanie>();
+            wszystkiePytania = ReadFromExcel.Read();
 
-            //for (int i = 0; i < listaPytaaaan.Count(); i++)
+            // wyswietlenie wszystkich pytan (dla sprawdzenia czy dziala poprawnie)
+            //for (int i = 0; i < wszystkiePytania.Count(); i++)
             //{
-            //    listaPytaaaan[i].WyswietlPytanie();
+            //    wszystkiePytania[i].WyswietlPytanie();
             //}
 
-            //ExportToPdf.ExportPdf(listaPytaaaan);     // zrobic tak ze przekazuje mu liste pytan a on sam to generuje
-            ExportToPdf.ExportPdf();
+            // generowanie pliku *.pdf z pytaniami do testu (wczytanymi z Excela)
+            ExportToPdf.GenerateTest(wszystkiePytania);       // TO BEDZIE DZIALAC JAK TO OPRACUJEMY
+            /*
+            ExportToPdf.GeneratePDF(wszystkiePytania);
 
+            //do testow stworzono idTestu I nemeTest, potem "idTestu" bedzie zwracane z bazy a uzytkownik bedzie podawal "nameTest"
+            int TestID = 15;
+            string nameTest = "Przykladowy TestName";
 
+            // generowanie klucza odpowiedzi do pliku *.csv, zeby potem ten plik wczytac do bazy danych
+            GenerateCSV.Generate(wszystkiePytania, TestID, nameTest);
+            */
             Console.WriteLine("\n\n\nWciśnij klawisz aby zamknąć program");
-            Console.ReadKey();      // czeka na wcisniecie jakiegokolwiek klawisza (tu zatrzymuje program przez natychmiastowym zamknieciem go
+            //Console.ReadKey();      // czeka na wcisniecie jakiegokolwiek klawisza (tu zatrzymuje program przez natychmiastowym zamknieciem go
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Questions
 {
-    class Pytanie
+    public class Pytanie
     {
         public int NrPytania;     // nr pytania
         public string Tresc;       // tresc pytania
@@ -27,6 +27,9 @@ namespace Questions
         }
 
         //metody
+        /// <summary>
+        /// Wyswietla dane pytanie
+        /// </summary>
         public void WyswietlPytanie()
         {
             Console.WriteLine(GetNrPytania() + " " + GetTresc() + ":");

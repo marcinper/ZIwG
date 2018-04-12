@@ -12,7 +12,57 @@ namespace Questions
 {
     public class ExportToPdf
     {
-        public static void ExportPdf()
+        /// <summary>
+        /// Generowanie testu *.pdf z pytan wczytanych z Excela
+        /// </summary>
+        /// <param name="listaPytan">Lista obiektow typu Pytanie wczytana z Excela</param>
+        public static void GenerateTest(List<Pytanie> listaPytan)
+        {
+            // moje proby i wypociny
+            Document doc = new Document(PageSize.A4.Rotate());
+
+            BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            iTextSharp.text.Font f_15_bold = new iTextSharp.text.Font(arial, 15, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font f_12_normal = new iTextSharp.text.Font(arial, 12, iTextSharp.text.Font.NORMAL);
+            iTextSharp.text.Font f_12_bold = new iTextSharp.text.Font(arial, 12, iTextSharp.text.Font.BOLD);
+
+            FileStream os = new FileStream("Tescik.pdf", FileMode.Create);
+            using (os)
+            {
+                PdfWriter.GetInstance(doc, os);
+                doc.Open();
+
+                //Paragraph paragraph = new Paragraph()
+                //{
+                //    new Phrase("1 Pytanie: " + "Numero uno" + "\n", f_12_bold),
+                //    new Phrase("           " + "A. pierwsza odpowiedx" + "\n", f_12_normal),
+                //    new Phrase("           " + "B. druga odpo" + "\n", f_12_normal),
+                //    new Phrase("           " + "C. trzecia odpowiedx" + "\n", f_12_normal),
+                //    new Phrase("           " + "D. i ostatnia odpowiedx" + "\n", f_12_normal),
+                //};
+                //paragraph.Alignment = Element.ALIGN_JUSTIFIED;
+                //doc.Add(paragraph);
+
+                Paragraph pytania = new Paragraph();
+                for (int i = 0; i < listaPytan.Count; i++)
+                {
+                    pytania.Add(new Phrase(i+1 +". " + listaPytan[i].GetTresc().ToString() + "\n", f_12_bold));        // numer i tresc pytania
+                    pytania.Add(new Phrase("           a: " + listaPytan[i].GetA().ToString() + "\n", f_12_normal));   // odpowiedz A
+                    pytania.Add(new Phrase("           b: " + listaPytan[i].GetB().ToString() + "\n", f_12_normal));   // odpowiedz B
+                    pytania.Add(new Phrase("           c: " + listaPytan[i].GetC().ToString() + "\n", f_12_normal));   // odpowiedz C
+                    pytania.Add(new Phrase("           d: " + listaPytan[i].GetB().ToString() + "\n", f_12_normal));   // odpowiedz D
+                }
+                pytania.Alignment = Element.ALIGN_JUSTIFIED;
+                doc.Add(pytania);
+
+                doc.Close();
+
+                // Open the document automatically
+                System.Diagnostics.Process.Start(@"Tescik.pdf");
+            }
+        }
+        
+        public static void GeneratePDF(List<Pytanie> listaPytan)
         {
             Document doc = new Document(PageSize.A4.Rotate());
 
