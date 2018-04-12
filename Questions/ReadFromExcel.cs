@@ -13,7 +13,6 @@ namespace Questions
     public class ReadFromExcel
     {
         //public static void Read()
-
         internal static List<Pytanie> Read()
         {
             List<Pytanie> listaPytan = new List<Pytanie>();               // lista obiektów Pytanie (treść, odpowiedzi i inne)
@@ -23,6 +22,7 @@ namespace Questions
 
             // !!!!!!!!!!!!!!!! tu zmienic lokalizacje pliku tak zeby wystarczylo sama nazwe pliku podac i nie trzeba bylo podawac lokalizacji!!!!!!!!!!!!!!!!!
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"D:\Marcin\Szkoła\Polibuda\[INF mgr] I rok I semestr (2018 lato)\Zastosowania inform. w gospod\P - Zastosowania inform. w gospod\Repo - projekt\Questions\Questions\bin\Debug\zestawPytań2.xlsx");
+            //Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"zestawPytań3.xlsx");
 
             Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
@@ -33,10 +33,7 @@ namespace Questions
             //iterate over the rows and columns and print to the console as it appears in the file
             //excel is not zero based!!
 
-
-            ///////////////////// probuje zrobic moja petle tak zeby petla na koniec uzywala konstruktora Pytanie() do dodania pytania do listy)/////////
-
-            // zmienne do wczytywania komorek z excela a nastepnie do uzycia konstruktrora pytania i dodania go do listy obiektow Pytanie
+            // zmienne do wczytywania komorek z excela a nastepnie do uzycia konstruktrora Pytanie() i dodania go do listy obiektow Pytanie
             int readNrPytania=0;
             string readTresc = "";
             string readA = "";
@@ -88,8 +85,10 @@ namespace Questions
                         aktualnyNrKolumny = 1;
                     }
                 }
-                //Console.WriteLine(readNrPytania.ToString() + readTresc + readA + readB + readC + readD + readSekwencjaOdpowiedzi);
+                // wywolanie kontstruktora Pytanie() aby wpisal wczytany wiersz z Excedo do obiektu Pytanie
                 listaPytan.Add(new Pytanie(readNrPytania, readTresc, readA, readB, readC, readD, readSekwencjaOdpowiedzi));
+                
+                //Console.WriteLine(readNrPytania.ToString() + readTresc + readA + readB + readC + readD + readSekwencjaOdpowiedzi);
                 //listaPytan[aktualnePytanie].WyswietlPytanie();
             }
 
@@ -98,23 +97,6 @@ namespace Questions
             //{
             //    listaPytan[i].WyswietlPytanie();
             //}
-            
-            /////////////////////////////////////////////////////////////
-
-            //for (int i = 1; i <= rowCount; i++)
-            //{
-            //    for (int j = 1; j <= colCount; j++)
-            //    {
-            //        //new line
-            //        if (j == 1)
-            //            Console.Write("\r\n");
-
-            //        //write the value to the console
-            //        if (xlRange.Cells[i, j] != null && xlRange.Cells[i, j].Value2 != null)
-            //            Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
-            //    }
-            //}
-
 
             // czeka na wcisniecie klawisza ESC aby kontynuowac
             //Console.WriteLine("\n\nPress ESC to stop");
@@ -125,15 +107,6 @@ namespace Questions
             //        // Do something
             //    }
             //} while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-
-            //for (int i = 3; i > 0; i--)
-            //{
-            //    Console.Write("\nZamykanie za: " + i + " sekund.");
-            //    Thread.Sleep(1000);
-            //}
-
-            // wstrzymuje program na wybrana liczbe milisekund
-            //Thread.Sleep(2000);
 
             //cleanup
             GC.Collect();

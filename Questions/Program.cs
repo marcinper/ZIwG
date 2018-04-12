@@ -12,26 +12,21 @@ namespace Questions
         {
             Console.WriteLine("Nic nie robie caly dzien. Sprawdzam czy to dziala");
 
-            //ReadFromExcel.Read();
+            // lista obiektow Pytanie, wczytanie do niej pytan z Excela i wyswietlenie wszystkich pytan
+            //List<Pytanie> listaPytaaaan = new List<Pytanie>();
+            //listaPytaaaan = ReadFromExcel.Read();
 
+            //for (int i = 0; i < listaPytaaaan.Count(); i++)
+            //{
+            //    listaPytaaaan[i].WyswietlPytanie();
+            //}
 
-            List<Pytanie> listaPytaaaan = new List<Pytanie>();
-            listaPytaaaan = ReadFromExcel.Read();
+            //ExportToPdf.ExportPdf(listaPytaaaan);     // zrobic tak ze przekazuje mu liste pytan a on sam to generuje
+            ExportToPdf.ExportPdf();
 
-            for (int i = 0; i < listaPytaaaan.Count(); i++)
-            {
-                listaPytaaaan[i].WyswietlPytanie();
-            }
-
-            //listaPytaaaan.Add(new Pytanie(1, "Dupa", "Aaa", "Bbb", "Ccc", "Ddd", "0010101"));
-            // ReadFromExcel.Read.listaPytaaaan();
 
             Console.WriteLine("\n\n\nWciśnij klawisz aby zamknąć program");
             Console.ReadKey();      // czeka na wcisniecie jakiegokolwiek klawisza (tu zatrzymuje program przez natychmiastowym zamknieciem go
-
-            
-
-
         }
     }
 }
